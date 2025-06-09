@@ -10,813 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            /* Change this line to use Quantico font */
-            font-family: 'Quantico', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #000000;
-            color: #ffffff;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Animated background grid */
-        .bg-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 2rem;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-
-       
-
-        .cta-primary {
-            background: #ffffff;
-            color: #000000;
-            padding: 0.75rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.95rem;
-        }
-
-        .cta-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-            background: #f0f0f0;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 6rem 2rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 4rem;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 2rem;
-            line-height: 1.1;
-            letter-spacing: -1px;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: #a0a0a0;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-secondary {
-            background: transparent;
-            color: #ffffff;
-            padding: 0.75rem 2rem;
-            border: 2px solid #ffffff;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.95rem;
-        }
-
-        .cta-secondary:hover {
-            background: #ffffff;
-            color: #000000;
-            transform: translateY(-2px);
-        }
-
-        /* Phone Mockup */
-        .phone-mockup {
-            width: 100%;
-            max-width: 300px;
-            height: 600px;
-            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
-            border-radius: 30px;
-            padding: 20px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            animation: float 6s ease-in-out infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .phone-header {
-            display: flex;
-            align-items: center;
-            padding: 10px 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #e9ecef;
-        }
-
-        .phone-header h3 {
-            color: #333;
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .message-card {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            color: #333;
-            animation: slideInUp 1s ease-out;
-            position: relative;
-        }
-
-        .message-card:nth-child(2) { animation-delay: 0.3s; }
-        .message-card:nth-child(3) { animation-delay: 0.6s; }
-        .message-card:nth-child(4) { animation-delay: 0.9s; }
-
-        @keyframes slideInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .message-card h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #000;
-        }
-
-        .message-card p {
-            font-size: 0.8rem;
-            color: #666;
-            margin: 0;
-        }
-
-        .message-time {
-            position: absolute;
-            bottom: 8px;
-            right: 12px;
-            font-size: 0.7rem;
-            color: #999;
-        }
-
-        /* Flow Diagram Styles */
-        .flow-diagram {
-            margin: 3rem 0;
-            padding: 3rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .flow-container {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: 3rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .flow-left {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .flow-item {
-            background: #ffffff;
-            color: #000000;
-            padding: 1rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            text-align: center;
-            font-size: 1rem;
-            position: relative;
-        }
-
-        .flow-item::after {
-            content: '';
-            position: absolute;
-            right: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid #ffffff;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-        }
-
-        .flow-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .flow-mascot {
-            width: 100px;
-            height: 100px;
-            background: #ffffff;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-        }
-        .hero-gif {
-    display: flex;
-    justify-content: center;
-}
-
-.hero-gif img {
-    height: 350px;
-    max-width: 100%;
-    width: auto;
-}
-
-@media (max-width: 768px) {
-    .hero-gif img {
-        height: 200px;
-        max-width: 90%;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-gif img {
-        height: 150px;
-        max-width: 85%;
-    }
-}
-
-
-        .mascot-icon {
-            font-size: 3rem;
-        }
-
-        .flow-right {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .flow-tokens {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .token {
-            width: 60px;
-            height: 60px;
-            background: #ffffff;
-            color: #000000;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.5rem;
-        }
-
-        /* Ready to Start Section */
-        .ready-to-start {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* How It Works Section Update */
-        .how-it-works {
-            padding: 6rem 2rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 4rem;
-            color: #ffffff;
-            letter-spacing: -1px;
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .step {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .step:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Step Icons */
-        .step-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .step h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .step p {
-            color: #a0a0a0;
-            font-size: 0.95rem;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 3rem;
-        }
-
-        .features-subtitle {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            max-width: 400px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            padding: 0;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-header {
-            padding: 2rem 2rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .feature-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .feature-price {
-            color: #a0a0a0;
-            font-size: 0.9rem;
-        }
-
-        .feature-list {
-            padding: 2rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 0;
-            color: #ffffff;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .feature-item:last-child {
-            border-bottom: none;
-        }
-
-        .feature-item::before {
-            content: "✓";
-            color: #ffffff;
-            font-weight: bold;
-            margin-right: 1rem;
-            font-size: 1.1rem;
-        }
-
-        /* Nonprofit Carousel Styles */
-        .nonprofit-carousel {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        .carousel-container {
-            margin-top: 3rem;
-            overflow: hidden;
-            mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
-        }
-
-        .carousel-track {
-            display: flex;
-            animation: scroll 20s linear infinite;
-            gap: 3rem;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .nonprofit-logo {
-            flex: 0 0 200px;
-            text-align: center;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .nonprofit-logo:hover {
-            opacity: 1;
-        }
-
-        .logo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .nonprofit-logo p {
-            color: #a0a0a0;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* Footer Styles */
-        .footer {
-            background: rgba(255, 255, 255, 0.02);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-link {
-            color: #a0a0a0;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: #ffffff;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .social-icon:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        .showcase {
-            padding: 6rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .showcase-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            letter-spacing: -1px;
-        }
-
-        .showcase-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-
-        .showcase-description {
-            font-size: 1.1rem;
-            color: #a0a0a0;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-        }
-
-        .roadmap-link {
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 2px solid #ffffff;
-            padding-bottom: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .roadmap-link:hover {
-            color: #a0a0a0;
-            border-bottom-color: #a0a0a0;
-        }
-
-        /* Final CTA Section */
-        .final-cta {
-            padding: 6rem 2rem;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .final-cta h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            letter-spacing: -1px;
-        }
-
-        .final-cta p {
-            font-size: 1.1rem;
-            color: #a0a0a0;
-            margin-bottom: 2.5rem;
-        }
-
-        .cta-large {
-            background: #ffffff;
-            color: #000000;
-            padding: 1.2rem 3rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-large:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
-            background: #f0f0f0;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
-                padding: 8rem 1rem 2rem;
-            }
-
-            .hero-content {
-                order: 2;
-            }
-
-            .phone-mockup {
-                order: 1;
-                width: 250px;
-                height: 500px;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .flow-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .flow-item::after {
-                display: none;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .features-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .steps {
-                grid-template-columns: 1fr;
-            }
-
-            .nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .final-cta h2 {
-                font-size: 2rem;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in-left {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .fade-in-right {
-            opacity: 0;
-            transform: translateX(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Stagger animations */
-        .stagger-1 { transition-delay: 0.1s; }
-        .stagger-2 { transition-delay: 0.2s; }
-        .stagger-3 { transition-delay: 0.3s; }
-        .stagger-4 { transition-delay: 0.4s; }
-    </style>
+   <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -827,8 +21,12 @@
             <div class="logo">
                 <div class="" style="">
                     <img src="image/icon_white.png" height="60px"  alt="Logo">
+
                 </div>
                 Feed4Good
+                <div style="margin-left: 10px;">
+                    <img src="image/iconPowering.jpg" width="150px" alt="">
+                </div>
             </div>
             <a href="#connect" class="cta-primary">Connect with Telegram</a>
         </nav>
@@ -837,34 +35,35 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Your daily boost of news, wisdom, and good vibes—gamified with $G4G points</h1>
+            <h1>Let Noise Go. Feed What Matters.</h1>
+
+            <h3 > Your first message of the day should feel worth it.</h3>
+            <h4 style="margin-top: 10px;"> It replaces dozens of newsletters, updates, and feeds with one daily message that actually saves you time and gives you clarity.</h4><br>
             <a href="#how-it-works" class="cta-secondary">See how it works with Telegram</a>
         </div>
         
          <div class="phone-mockup">
-            <div class="phone-screen">
-                <div class="phone-header">
-                    <h3>📱 Telegram</h3>
-                </div>
-                
-                <div class="message-card">
-                    <h4>Quonduin Shriz</h4>
-                    <p>Good morning! Here's your personalized news summary...</p>
-                    <div class="message-time">8:00</div>
-                </div>
-                
-                <div class="message-card">
-                    <h4>News Hertlane</h4>
-                    <p>🌍 Climate breakthrough in renewable energy storage...</p>
-                    <div class="message-time">8:02</div>
-                </div>
-                
-                <div class="message-card">
-                    <h4>Varding Smurm</h4>
-                    <p>💪 "Progress, not perfection" - Your daily motivation</p>
-                    <div class="message-time">10:56</div>
-                </div>
+            <div class="">
+               <img src="image/telegramImg.png" height="500px" alt="">
             </div>
+        </div> 
+    </section>
+
+     <section class="hero">
+        <div class="" style="padding: 10px;">
+            <img src="image/greedy drowning2.svg" height="350px" alt="Phone Mockup" >
+        </div>
+        <div class="hero-content">
+            <h1>Stop drowning in news. Start with one clean feed.</h1> <br>
+            <h3 > At 8AM, Feed4Good AI sends you one short update on Telegram.
+It includes real news, a smart quote, and a quick view of what’s going on — without the mess.
+No feeds to check. No scrolling. No tabs.
+You stay sharp in under a minute.</h3>
+            <h4 style="margin-top: 10px;"> It replaces dozens of newsletters, updates, and feeds with one daily message that actually saves you time and gives you clarity.</h4><br>
+               </div>
+        
+         
+           
         </div> 
     </section>
 
@@ -903,65 +102,315 @@
         </div>
     </section>
 
+
+    
     <!-- Ready to Start Section -->
     <section class="ready-to-start fade-in">
         <div class="container">
-            <h2 class="section-title">Ready to start?</h2>
+            <h2 class="">HOW IT WORKS </h2>
+            <h3>“From chaos to clarity in 60 seconds.”</h3> <br>
             <div class="steps">
+                  <div class="steps"><div class="">
+                   <img src="image/from 0 to 60 greedy rocket.svg" height="200px" alt="">
+                </div>
                 <div class="step fade-in stagger-1">
-                    <div class="step-icon">📱</div>
-                    <h3>Connect Telegram</h3>
-                    <p>One-click sign-up. No spam.</p>
+                    <div class="step-icon">
+                        <img src="image/connect.svg" alt="Connect Icon" width="40" height="40">
+                    </div>
+                    <h3>Connect once</h3>
+                    <p>No email. No login. Just connect Telegram.
+</p>
                 </div>
                 <div class="step fade-in stagger-2">
                     <div class="step-icon">⚙️</div>
-                    <h3>Choose categories or custom interests</h3>
-                    <p>Personalize your news feed to match your interests.</p>
+                    <h3>Choose what matters.</h3>
+                    <p>Pick your interests — news, Web3, wellness, or your own sources.</p>
                 </div>
-                <div class="step fade-in stagger-3">
-                    <div class="step-icon">🌅</div>
-                    <h3>Receive daily updates at 8 AM</h3>
-                    <p>Start your day with curated content delivered right to you.</p>
+                  <div class="step fade-in stagger-4">
+                    <div class="step-icon" style="padding: 13px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M64 0C28.7 0 0 28.7 0 64L0 352c0 35.3 28.7 64 64 64l96 0 0 80c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L309.3 416 448 416c35.3 0 64-28.7 64-64l0-288c0-35.3-28.7-64-64-64L64 0z"></path></svg>
+                    </div>
+                    <h3>Get one message daily.</h3>
+                    <p>At 8AM, your full update lands. Short. Clean. No noise.</p>
                 </div>
-                <div class="step fade-in stagger-4">
-                    <div class="step-icon">🎁</div>
-                    <h3>Earn GP points, support charity, and unlock rewards</h3>
-                    <p>Turn good habits into real-world impact and exclusive benefits.</p>
+               
+                 <div class="step fade-in stagger-4">
+                    <div class="step-icon">
+                        <img src="image/read_earn.svg" alt="Investment Icon" width="40" height="40">
+                    </div>
+                    <h3>Read and earn.</h3>
+                    <p>You get Good Points for reading. No extra effort.</p>
                 </div>
+               
+                 <div class="step fade-in stagger-4">
+                    <div class="step-icon">
+                        <img src="image/share_grow.svg" alt="Investment Icon" width="40" height="40">
+                    </div>
+                    <h3>Share and grow.</h3>
+                    <p>Invite friends, build streaks, and level up </p>
+                </div>
+    
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
+ 
+
+    <!-- Features Section -->
     <section class="features fade-in">
-        <div class="features-header">
+        <div class="container">
             <h2 class="section-title">Features</h2>
-            <p class="features-subtitle">Your actions unlock real-world good.</p>
+            
+            <div class="features-grid-new">
+                <div class="">
+                    <div class="" style="text-align: center; display: flex; justify-content: center; margin-top: 100px; ">
+                        <img src="image/greedy drowning2.svg" height="150px" alt="">
+                    </div>
+                     </div>
+
+                <div class="feature-item-new fade-in stagger-1">
+                    <div class="feature-icon">
+                        <img src="image/1-AI_summary.svg" height="50px" alt="">
+                    </div>
+                    <h3>Daily News Summaries</h3>
+                    <p>AI reads top newsletters, ecosystem updates, and niche feeds. Summarizes them into short, clear insights. Delivered once daily (Free) or real-time (Premium).</p>
+                </div>
+                
+                <div class="feature-item-new fade-in stagger-2">
+                    <div class="feature-icon">
+                         <img src="image/2-quote_mood.svg" height="50px" alt="">
+                    </div>
+                    <h3>Motivational Quote Generator</h3>
+                    <p>Every digest includes a quote matched to the theme or mood of the news. Boosts mindset, mood, and focus.</p>
+                </div>
+                
+                <div class="feature-item-new fade-in stagger-3">
+                    <div class="feature-icon">
+                         <img src="image/3-read_listen.svg" height="50px" alt="">
+                    </div>
+                    <h3>AI Voice Playback</h3>
+                    <p>Turn your summaries into audio. Choose from fun or iconic voice styles (Premium). Listen on the go.</p>
+                </div>
+                
+                <div class="feature-item-new fade-in stagger-4">
+                    <div class="feature-icon">
+                         <img src="image/4-AI_help.svg" height="50px" alt="">
+                    </div>
+                    <h3>AI help</h3>
+                    <p> Optional mood check-ins. AI adjusts tone of quotes or suggests breathing tips, micro-breaks, etc.</p>
+                </div>
+                
+                 <div class="feature-item-new fade-in stagger-4">
+                    <div class="feature-icon">
+                         <img src="image/5-events_near.svg" height="50px" alt="">
+                    </div>
+                    <h3>Events near</h3>
+                    <p>Get real suggestions based on where you live: yoga, meetups, or quiet spaces to recharge.</p>
+                </div>
+                 <div class="feature-item-new fade-in stagger-4">
+                    <div class="feature-icon">
+                         <img src="image/6-delivery.svg" height="50px" alt="">
+                    </div>
+                    <h3>Delivery</h3>
+                    <p>Default: 8AM sharp.
+Change the time or get more updates per day — easy to set, easy to pause.</p>
+                </div>
+                 <div class="feature-item-new fade-in stagger-4">
+                    <div class="feature-icon">
+                         <img src="image/7-own_sources.svg" height="50px" alt="">
+                    </div>
+                    <h3>Own sources</h3>
+                    <p>You pick what the AI reads
+It turns chaos into one clean message.</p>
+                </div>
+                <div class="feature-item-new fade-in stagger-1">
+                    <div class="feature-icon">
+                        <img src="image/8-airdrop_alert.svg" height="50px" alt="">
+                    </div>
+                    <h3>Airdrop Alert</h3>
+                    <p>Get legit updates about crypto airdrops — real ones, explained simply.</p>
+                </div>
+                
+                <div class="feature-item-new fade-in stagger-2">
+                    <div class="feature-icon">
+                        <img src="image/9-good-points.svg" height="50px" alt="">
+                    </div>
+                    <h3>Good Points</h3>
+                    <p>You earn points by staying informed.
+Spend them to vote on causes, unlock extras, or get weekly NFT drops.</p>
+                </div>
+                
+              
+                <div class="feature-item-new fade-in stagger-1">
+                    <div class="feature-icon">🗳️</div>
+                    <h3>Charity & DAO Voting</h3>
+                    <p> Use points to influence where donations go. Vote on product features or NFT releases.</p>
+                </div>
+                
+                
+                
+                <div class="feature-item-new fade-in stagger-3">
+                    <div class="feature-icon">
+                         <img src="image/10-fully private.svg" height="50px" alt="">
+                    </div>
+                    <h3>Privacy-First Architecture</h3>
+                    <p>No email required. Manual or OAuth-based connections. No data is stored unless you explicitly choose to.</p>
+                </div>
+                
+                
+            </div>
         </div>
-        <div class="features-grid">
-            <div class="feature-card fade-in-left">
-                <div class="feature-header">
-                    <h3 class="feature-title">Free Plan</h3>
+    </section>
+
+    <!-- Subscription Selection Section -->
+    <section class="subscription-selection fade-in">
+        <div class="container">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <div class="plans-grid">
+                
+                <!-- Free Plan -->
+                <div class="plan-card free-plan fade-in-left">
+                    <div class="plan-header">
+                        <h3 class="plan-title">Free Plan</h3>
+                        <div class="plan-price">$0<span>/month</span></div>
+                    </div>
+                    
+                    <div class="plan-features">
+                        <h4>🧠 Core Features:</h4>
+                        
+                        <div class="feature-group">
+                            <h5>Daily AI News Digest</h5>
+                            <ul>
+                                <li>Delivered once per day at 8:00 AM (your time zone)</li>
+                                <li>Summarized from up to 5 feeds (choose from our list or upload manually)</li>
+                                <li>Crisp, emotional, no clutter</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Motivational Quote of the Day</h5>
+                            <ul>
+                                <li>Selected based on news tone or your interest</li>
+                                <li>Designed to shift your emotional state in the morning</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Points System (GP Points)</h5>
+                            <ul>
+                                <li>Earn points for daily engagement</li>
+                                <li>Share with friends to earn bonus</li>
+                                <li>Points used for status, rewards, or impact votes</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Privacy-First by Design</h5>
+                            <ul>
+                                <li>No login or email needed</li>
+                                <li>Manual or minimal OAuth for feed selection</li>
+                                <li>Data not stored — ephemeral processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <button class="plan-cta free-cta">Start Free</button>
                 </div>
-                <div class="feature-list">
-                    <div class="feature-item">Up to 5 categories</div>
-                    <div class="feature-item">Daily 8 AM summary</div>
-                    <div class="feature-item">Motivational quote</div>
-                    <div class="feature-item">Basic AI voice reader</div>
+                
+                <!-- Premium Plan -->
+                <div class="plan-card premium-plan fade-in-right">
+                    <div class="plan-header">
+                        <h3 class="plan-title">Premium Plan</h3>
+                        <div class="plan-price">$9.99<span>/month</span></div>
+                        <div class="plan-badge">Most Popular</div>
+                    </div>
+                    
+                    <div class="plan-features">
+                        <h4>🔥 Core Premium Features:</h4>
+                        
+                        <div class="feature-group">
+                            <h5>Unlimited Custom News Sources</h5>
+                            <ul>
+                                <li>Connect more than 5 feeds (manual upload or RSS)</li>
+                                <li>Track niche alpha newsletters, ecosystems, subreddits, token drops</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Smart Frequency Control</h5>
+                            <ul>
+                                <li>🕗 Daily</li>
+                                <li>⏱️ 3x/day</li>
+                                <li>🚨 Real-time breaking alerts</li>
+                                <li>Customize time zones & weekend/off mode</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>AI Voice Personalization</h5>
+                            <ul>
+                                <li>Choose any voice: Caesar, Cleopatra, GigaChad, or upload your own</li>
+                                <li>Listen to summaries in emotional or fun tone</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Wellness & Event Support (Local)</h5>
+                            <ul>
+                                <li>🌿 Yoga, 🧠 Public speaking, 🎨 Art therapy, 🎤 Meetups</li>
+                                <li>Tailored to city, interest, time of day</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Airdrop Calendar</h5>
+                            <ul>
+                                <li>Curated list of upcoming Web3 airdrops</li>
+                                <li>AI explains: value, eligibility, risk</li>
+                                <li>Weekly reminder or real-time alerts</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>AI Mood Companion</h5>
+                            <ul>
+                                <li>Daily mood check → sends curated content based on your emotional state</li>
+                                <li>Bonus: energy tips, quote therapy, mental boost audio</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>DAO & Charity Voting Access</h5>
+                            <ul>
+                                <li>Use GP Points to vote: Which features to unlock</li>
+                                <li>What NFT goes live next week</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Streak Rewards + NFT Badges</h5>
+                            <ul>
+                                <li>Daily streak = earn points</li>
+                                <li>Weekly = unlock exclusive Proof-of-Good NFT</li>
+                                <li>Shareable, collectible, boosts rank</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-group">
+                            <h5>Integration Pack</h5>
+                            <ul>
+                                <li>Connect Notion, Google Calendar, Email</li>
+                                <li>Auto-export summaries, quotes, events</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <button class="plan-cta premium-cta">Available Soon</button>
                 </div>
             </div>
-            <div class="feature-card fade-in-right">
-                <div class="feature-header">
-                    <h3 class="feature-title">Paid Plan (Feed for Good+)</h3>
-                </div>
-                <div class="feature-list">
-                    <div class="feature-item">Up to 15 categories</div>
-                    <div class="feature-item">Real-time updates</div>
-                    <div class="feature-item">Personalized wellness tips by timezone</div>
-                    <div class="feature-item">Weekly NFT calendar drops</div>
-                    <div class="feature-item">Advanced streak tracker + bonus points</div>
-                </div>
-            </div>
+            
+         
         </div>
     </section>
 
@@ -971,28 +420,79 @@
             <h2 class="section-title">Supporting Global Impact</h2>
             <div class="carousel-container">
                 <div class="carousel-track">
-                    <div class="nonprofit-logo">
-                        <div class="logo-placeholder">🌍</div>
+                    <div class="nonprofit-logo" >
+                        <div class="logo-placeholder" style="padding: 13px;">
+                            <?xml version="1.0" encoding="UTF-8"?>
+                            <svg id="Ebene_2" data-name="Ebene 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208.73 159.41"> <g id="Ebene_1-2" data-name="Ebene 1"><path fill="#ffffff" d="M115.52,139.44c.4,0,.81,0,1.21,0,6.75,0,13.5,0,20.25,0s12.93,0,19.39-.01c4.07,0,6.32-2.04,7.01-6.23,.43-2.61-.58-4.67-1.92-6.57-5.73-8.11-11.46-16.22-17.17-24.34-.46-.66-.85-1.38-1.64-2.7,1.54,0,2.87,.06,4.1,.06,.8,0,1.56-.03,2.32-.11,1.72-.19,3.6-.37,5.07-1.31,3.87-2.48,4.05-7.26,.57-11.44-5.54-6.64-11.13-13.21-16.69-19.82-.5-.59-.93-1.25-1.76-2.37,1.45,0,2.64,.02,3.75,.02,.67,0,1.3,0,1.93-.03,3.67-.12,5.88-2.13,6.62-5.95,.55-2.85-.62-5.02-2.12-6.96-12.65-16.31-25.31-32.61-37.99-48.89-1.45-1.86-2.74-2.79-4.04-2.79s-2.63,.95-4.12,2.86c-10.97,14.07-21.92,28.16-32.86,42.27-2.18,2.82-4.51,5.54-6.33,8.66-2.29,3.91-.67,8.82,3.18,10.16,1.58,.55,3.33,.47,5,.64,.92,.1,1.84,.13,3.26,.23-.98,1.2-1.54,1.92-2.13,2.62-5.37,6.36-10.77,12.7-16.12,19.08-1.5,1.78-2.9,3.63-2.56,6.49,.48,4.06,2.78,6.3,7.07,6.53,.82,.04,1.64,.06,2.46,.06,1.35,0,2.71-.04,4.06-.04,.15,.26,.3,.53,.45,.79-1.34,1.96-2.67,3.93-4.04,5.86-4.82,6.83-9.67,13.64-14.48,20.49-1.38,1.97-2.41,4.11-1.84,6.84,.82,3.94,3.18,5.88,7.33,5.88,6.59,0,13.18,.02,19.77,.02,7.03,0,14.06-.01,21.09-.07,.02,0,.04,0,.06,0,1.95,0,2.49,.77,2.45,2.99-.06,3.23-.2,6.55,.34,9.68,.84,4.86,4.27,7.35,7.82,7.35,1.41,0,2.85-.4,4.15-1.2,3.14-1.94,4.27-5.36,4.37-9.32,.08-3.05,.02-6.1,.02-9.45h2.74Z"/><path fill="#ffffff" d="M207.02,112.81c-4.83-5.81-9.66-11.62-14.48-17.44-.39-.47-.72-.99-1.39-1.93,2.14,0,3.79,.12,5.41-.04,1.45-.14,3.04-.27,4.27-.94,3.27-1.78,3.42-5.2,.48-8.19-4.67-4.76-9.39-9.46-14.08-14.2-.42-.42-.78-.9-1.48-1.7,1.95,0,3.37,.03,4.79,0,3.09-.09,4.96-1.53,5.58-4.26,.46-2.04-.52-3.6-1.79-4.99-10.67-11.69-21.34-23.36-32.04-35.02-2.46-2.68-4.38-2.67-6.88,.05-3.88,4.23-7.75,8.47-11.63,12.71,2.68,3.46,5.4,6.96,8.17,10.54,1.17,1.51,4.72,6.09,3.47,12.57-.83,4.29-2.99,7.58-6.12,9.54,.03,.03,.05,.06,.08,.09,3.51,4.15,7.14,8.45,10.69,12.71,3.2,3.84,4.6,8.31,3.95,12.59-.58,3.79-2.76,7.07-6.12,9.22-.93,.59-1.87,1.03-2.8,1.35,2.38,3.37,4.76,6.74,7.14,10.11l4.52,6.4h1.51c11.48,0,22.97,0,34.45,0,3.43,0,5.33-1.46,5.91-4.46,.36-1.87-.49-3.34-1.62-4.71Z"/><path fill="#ffffff" d="M41.93,122.1c2.7-3.84,5.42-7.68,8.13-11.51,1.18-1.66,2.35-3.32,3.53-4.98-4.94-1.78-8.14-5.94-8.82-11.76-.71-6.03,2.57-9.93,4.15-11.81,3.54-4.21,7.08-8.4,10.63-12.6-2.56-1.54-4.56-3.94-5.64-6.87-1.49-4.04-1.08-8.52,1.13-12.3,1.69-2.9,3.63-5.35,5.51-7.72,.45-.56,.89-1.13,1.33-1.7,1.04-1.34,2.06-2.66,3.09-3.98-3.89-4.25-7.78-8.51-11.68-12.76-2.46-2.68-4.38-2.67-6.88,.05-9.25,10.08-18.49,20.17-27.71,30.28-1.84,2.02-3.8,3.97-5.34,6.21-1.93,2.8-.56,6.32,2.68,7.28,1.34,.39,2.81,.33,4.22,.46,.78,.07,1.55,.1,2.75,.17-.82,.86-1.3,1.38-1.79,1.88-4.53,4.56-9.08,9.1-13.6,13.67-1.26,1.28-2.44,2.6-2.16,4.65,.4,2.91,2.35,4.51,5.96,4.68,1.83,.08,3.67,.01,5.5,.01,.13,.19,.25,.38,.38,.56-1.13,1.4-2.25,2.81-3.41,4.2-4.07,4.9-8.16,9.77-12.21,14.68-1.17,1.41-2.03,2.95-1.55,4.9,.69,2.83,2.68,4.21,6.18,4.21,11.48,.01,22.97,.04,34.45-.03,.48,0,.85,.05,1.15,.15Z"/> </g></svg>
+                        </div>
                         <p>Global Forest Initiative</p>
                     </div>
-                    <div class="nonprofit-logo">
-                        <div class="logo-placeholder">📚</div>
-                        <p>Education for All</p>
+                    <div class="nonprofit-logo" >
+                        <div class="logo-placeholder" style="padding: 13px;">
+                            <?xml version="1.0" encoding="UTF-8"?>
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M224 0a80 80 0 1 1 0 160A80 80 0 1 1 224 0zM436.8 382.8L373.5 462c-16.6 20.7-46.8 24.1-67.5 7.5c-17.6-14.1-22.7-38.1-13.5-57.7l-.8-.1c-38.9-5.6-74.3-25.1-99.7-54.8l0-36.8c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 48c0 .8 0 1.6 .1 2.4l101.4 50.7c23.7 11.9 33.3 40.7 21.5 64.4s-40.7 33.3-64.4 21.5L27.2 427.3c-1.1-.5-2.2-1.1-3.3-1.7c-4.9-2.8-9.2-6.4-12.6-10.6c-4.6-5.4-7.8-11.7-9.6-18.4c-3.3-12-1.9-25.2 4.8-36.6c.6-1.1 1.3-2.2 2-3.2L75.6 256.1c26.7-40.1 71.7-64.1 119.8-64.1l75.2 0c46.5 0 90.1 22.5 117.2 60.3l50.7 70.9c2.2 3 4 6.1 5.5 9.4c2.9 6.7 4.3 13.8 4 20.8c-.3 10.6-4.2 21-11.2 29.4zM320 332a44 44 0 1 0 -88 0 44 44 0 1 0 88 0z"/></svg>
+                        </div>
+                        <p>Children’s Welfare</p>
+                    </div>
+                     <div class="nonprofit-logo" >
+                        <div class="logo-placeholder" style="padding: 13px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM160.9 286.2c4.8 1.2 9.9 1.8 15.1 1.8c35.3 0 64-28.7 64-64l0-64 44.2 0c12.1 0 23.2 6.8 28.6 17.7L320 192l64 0c8.8 0 16 7.2 16 16l0 32c0 44.2-35.8 80-80 80l-48 0 0 50.7c0 7.3-5.9 13.3-13.3 13.3c-1.8 0-3.6-.4-5.2-1.1l-98.7-42.3c-6.6-2.8-10.8-9.3-10.8-16.4c0-2.8 .6-5.5 1.9-8l15-30zM160 160l40 0 8 0 0 32 0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-48c0-8.8 7.2-16 16-16zm128 48a16 16 0 1 0 -32 0 16 16 0 1 0 32 0z"/></svg>
+                        </div>
+                        <p>Animal Protection</p>
                     </div>
                     <div class="nonprofit-logo">
-                        <div class="logo-placeholder">💧</div>
+                        <div class="logo-placeholder" style="padding: 13px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M160 96a96 96 0 1 1 192 0A96 96 0 1 1 160 96zm80 152l0 264-48.4-24.2c-20.9-10.4-43.5-17-66.8-19.3l-96-9.6C12.5 457.2 0 443.5 0 427L0 224c0-17.7 14.3-32 32-32l30.3 0c63.6 0 125.6 19.6 177.7 56zm32 264l0-264c52.1-36.4 114.1-56 177.7-56l30.3 0c17.7 0 32 14.3 32 32l0 203c0 16.4-12.5 30.2-28.8 31.8l-96 9.6c-23.2 2.3-45.9 8.9-66.8 19.3L272 512z"/></svg></div>
+                        <p>Education for All</p>
+                    </div>
+                    <div class="nonprofit-logo" >
+                        <div class="logo-placeholder" style="padding: 13px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M269.5 69.9c11.1-7.9 25.9-7.9 37 0C329 85.4 356.5 96 384 96c26.9 0 55.4-10.8 77.4-26.1c0 0 0 0 0 0c11.9-8.5 28.1-7.8 39.2 1.7c14.4 11.9 32.5 21 50.6 25.2c17.2 4 27.9 21.2 23.9 38.4s-21.2 27.9-38.4 23.9c-24.5-5.7-44.9-16.5-58.2-25C449.5 149.7 417 160 384 160c-31.9 0-60.6-9.9-80.4-18.9c-5.8-2.7-11.1-5.3-15.6-7.7c-4.5 2.4-9.7 5.1-15.6 7.7c-19.8 9-48.5 18.9-80.4 18.9c-33 0-65.5-10.3-94.5-25.8c-13.4 8.4-33.7 19.3-58.2 25c-17.2 4-34.4-6.7-38.4-23.9s6.7-34.4 23.9-38.4C42.8 92.6 61 83.5 75.3 71.6c11.1-9.5 27.3-10.1 39.2-1.7c0 0 0 0 0 0C136.7 85.2 165.1 96 192 96c27.5 0 55-10.6 77.5-26.1zm37 288C329 373.4 356.5 384 384 384c26.9 0 55.4-10.8 77.4-26.1c0 0 0 0 0 0c11.9-8.5 28.1-7.8 39.2 1.7c14.4 11.9 32.5 21 50.6 25.2c17.2 4 27.9 21.2 23.9 38.4s-21.2 27.9-38.4 23.9c-24.5-5.7-44.9-16.5-58.2-25C449.5 437.7 417 448 384 448c-31.9 0-60.6-9.9-80.4-18.9c-5.8-2.7-11.1-5.3-15.6-7.7c-4.5 2.4-9.7 5.1-15.6 7.7c-19.8 9-48.5 18.9-80.4 18.9c-33 0-65.5-10.3-94.5-25.8c-13.4 8.4-33.7 19.3-58.2 25c-17.2 4-34.4-6.7-38.4-23.9s6.7-34.4 23.9-38.4c18.1-4.2 36.2-13.3 50.6-25.2c11.1-9.4 27.3-10.1 39.2-1.7c0 0 0 0 0 0C136.7 373.2 165.1 384 192 384c27.5 0 55-10.6 77.5-26.1c11.1-7.9 25.9-7.9 37 0zm0-144C329 229.4 356.5 240 384 240c26.9 0 55.4-10.8 77.4-26.1c0 0 0 0 0 0c11.9-8.5 28.1-7.8 39.2 1.7c14.4 11.9 32.5 21 50.6 25.2c17.2 4 27.9 21.2 23.9 38.4s-21.2 27.9-38.4 23.9c-24.5-5.7-44.9-16.5-58.2-25C449.5 293.7 417 304 384 304c-31.9 0-60.6-9.9-80.4-18.9c-5.8-2.7-11.1-5.3-15.6-7.7c-4.5 2.4-9.7 5.1-15.6 7.7c-19.8 9-48.5 18.9-80.4 18.9c-33 0-65.5-10.3-94.5-25.8c-13.4 8.4-33.7 19.3-58.2 25c-17.2 4-34.4-6.7-38.4-23.9s6.7-34.4 23.9-38.4c18.1-4.2 36.2-13.3 50.6-25.2c11.1-9.5 27.3-10.1 39.2-1.7c0 0 0 0 0 0C136.7 229.2 165.1 240 192 240c27.5 0 55-10.6 77.5-26.1c11.1-7.9 25.9-7.9 37 0z"/></svg></div>
                         <p>Clean Water Foundation</p>
                     </div>
-                    <div class="nonprofit-logo">
-                        <div class="logo-placeholder">🌍</div>
+                    <div class="nonprofit-logo" >
+                        <div class="logo-placeholder" style="padding: 13px;">
+                            <?xml version="1.0" encoding="UTF-8"?>
+                            <svg id="Ebene_2" data-name="Ebene 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208.73 159.41"> <g id="Ebene_1-2" data-name="Ebene 1"><path fill="#ffffff" d="M115.52,139.44c.4,0,.81,0,1.21,0,6.75,0,13.5,0,20.25,0s12.93,0,19.39-.01c4.07,0,6.32-2.04,7.01-6.23,.43-2.61-.58-4.67-1.92-6.57-5.73-8.11-11.46-16.22-17.17-24.34-.46-.66-.85-1.38-1.64-2.7,1.54,0,2.87,.06,4.1,.06,.8,0,1.56-.03,2.32-.11,1.72-.19,3.6-.37,5.07-1.31,3.87-2.48,4.05-7.26,.57-11.44-5.54-6.64-11.13-13.21-16.69-19.82-.5-.59-.93-1.25-1.76-2.37,1.45,0,2.64,.02,3.75,.02,.67,0,1.3,0,1.93-.03,3.67-.12,5.88-2.13,6.62-5.95,.55-2.85-.62-5.02-2.12-6.96-12.65-16.31-25.31-32.61-37.99-48.89-1.45-1.86-2.74-2.79-4.04-2.79s-2.63,.95-4.12,2.86c-10.97,14.07-21.92,28.16-32.86,42.27-2.18,2.82-4.51,5.54-6.33,8.66-2.29,3.91-.67,8.82,3.18,10.16,1.58,.55,3.33,.47,5,.64,.92,.1,1.84,.13,3.26,.23-.98,1.2-1.54,1.92-2.13,2.62-5.37,6.36-10.77,12.7-16.12,19.08-1.5,1.78-2.9,3.63-2.56,6.49,.48,4.06,2.78,6.3,7.07,6.53,.82,.04,1.64,.06,2.46,.06,1.35,0,2.71-.04,4.06-.04,.15,.26,.3,.53,.45,.79-1.34,1.96-2.67,3.93-4.04,5.86-4.82,6.83-9.67,13.64-14.48,20.49-1.38,1.97-2.41,4.11-1.84,6.84,.82,3.94,3.18,5.88,7.33,5.88,6.59,0,13.18,.02,19.77,.02,7.03,0,14.06-.01,21.09-.07,.02,0,.04,0,.06,0,1.95,0,2.49,.77,2.45,2.99-.06,3.23-.2,6.55,.34,9.68,.84,4.86,4.27,7.35,7.82,7.35,1.41,0,2.85-.4,4.15-1.2,3.14-1.94,4.27-5.36,4.37-9.32,.08-3.05,.02-6.1,.02-9.45h2.74Z"/><path fill="#ffffff" d="M207.02,112.81c-4.83-5.81-9.66-11.62-14.48-17.44-.39-.47-.72-.99-1.39-1.93,2.14,0,3.79,.12,5.41-.04,1.45-.14,3.04-.27,4.27-.94,3.27-1.78,3.42-5.2,.48-8.19-4.67-4.76-9.39-9.46-14.08-14.2-.42-.42-.78-.9-1.48-1.7,1.95,0,3.37,.03,4.79,0,3.09-.09,4.96-1.53,5.58-4.26,.46-2.04-.52-3.6-1.79-4.99-10.67-11.69-21.34-23.36-32.04-35.02-2.46-2.68-4.38-2.67-6.88,.05-3.88,4.23-7.75,8.47-11.63,12.71,2.68,3.46,5.4,6.96,8.17,10.54,1.17,1.51,4.72,6.09,3.47,12.57-.83,4.29-2.99,7.58-6.12,9.54,.03,.03,.05,.06,.08,.09,3.51,4.15,7.14,8.45,10.69,12.71,3.2,3.84,4.6,8.31,3.95,12.59-.58,3.79-2.76,7.07-6.12,9.22-.93,.59-1.87,1.03-2.8,1.35,2.38,3.37,4.76,6.74,7.14,10.11l4.52,6.4h1.51c11.48,0,22.97,0,34.45,0,3.43,0,5.33-1.46,5.91-4.46,.36-1.87-.49-3.34-1.62-4.71Z"/><path fill="#ffffff" d="M41.93,122.1c2.7-3.84,5.42-7.68,8.13-11.51,1.18-1.66,2.35-3.32,3.53-4.98-4.94-1.78-8.14-5.94-8.82-11.76-.71-6.03,2.57-9.93,4.15-11.81,3.54-4.21,7.08-8.4,10.63-12.6-2.56-1.54-4.56-3.94-5.64-6.87-1.49-4.04-1.08-8.52,1.13-12.3,1.69-2.9,3.63-5.35,5.51-7.72,.45-.56,.89-1.13,1.33-1.7,1.04-1.34,2.06-2.66,3.09-3.98-3.89-4.25-7.78-8.51-11.68-12.76-2.46-2.68-4.38-2.67-6.88,.05-9.25,10.08-18.49,20.17-27.71,30.28-1.84,2.02-3.8,3.97-5.34,6.21-1.93,2.8-.56,6.32,2.68,7.28,1.34,.39,2.81,.33,4.22,.46,.78,.07,1.55,.1,2.75,.17-.82,.86-1.3,1.38-1.79,1.88-4.53,4.56-9.08,9.1-13.6,13.67-1.26,1.28-2.44,2.6-2.16,4.65,.4,2.91,2.35,4.51,5.96,4.68,1.83,.08,3.67,.01,5.5,.01,.13,.19,.25,.38,.38,.56-1.13,1.4-2.25,2.81-3.41,4.2-4.07,4.9-8.16,9.77-12.21,14.68-1.17,1.41-2.03,2.95-1.55,4.9,.69,2.83,2.68,4.21,6.18,4.21,11.48,.01,22.97,.04,34.45-.03,.48,0,.85,.05,1.15,.15Z"/> </g></svg>
+                        </div>
                         <p>Global Forest Initiative</p>
                     </div>
-                    <div class="nonprofit-logo">
-                        <div class="logo-placeholder">📚</div>
-                        <p>Education for All</p>
+                    <div class="nonprofit-logo" >
+                        <div class="logo-placeholder" style="padding: 13px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM160.9 286.2c4.8 1.2 9.9 1.8 15.1 1.8c35.3 0 64-28.7 64-64l0-64 44.2 0c12.1 0 23.2 6.8 28.6 17.7L320 192l64 0c8.8 0 16 7.2 16 16l0 32c0 44.2-35.8 80-80 80l-48 0 0 50.7c0 7.3-5.9 13.3-13.3 13.3c-1.8 0-3.6-.4-5.2-1.1l-98.7-42.3c-6.6-2.8-10.8-9.3-10.8-16.4c0-2.8 .6-5.5 1.9-8l15-30zM160 160l40 0 8 0 0 32 0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-48c0-8.8 7.2-16 16-16zm128 48a16 16 0 1 0 -32 0 16 16 0 1 0 32 0z"/></svg>
+                        </div>
+                        <p>Animal Protection</p>
                     </div>
-                    <div class="nonprofit-logo">
-                        <div class="logo-placeholder">💧</div>
+                   <div class="nonprofit-logo">
+                        <div class="logo-placeholder" style="padding: 13px;">
+                            <?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_2" data-name="Ebene 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.51 158.96">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Ebene_1-2" data-name="Ebene 1">
+    <g>
+      <path class="cls-1" d="M80.14,22.47c3.31,0,6.62,.02,9.93-.01,.72,0,.93,.23,1,.95,.42,4.4,.41,8.79,0,13.18-.07,.77-.34,.92-1.03,.92-6.59-.02-13.17-.02-19.76,0-.75,0-1.09-.24-1.09-.99,0-4.33,0-8.67,0-13,0-.78,.31-1.07,1.13-1.06,3.28,.04,6.56,.02,9.83,.02Z"/>
+      <path class="cls-1" d="M90.42,41.34c-.31,1.47-.57,2.87-.91,4.25-.97,3.96-2.26,7.82-4.76,11.1-.88,1.15-2.14,2.04-3.32,2.93-.78,.58-1.71,.43-2.58,.01-2.31-1.09-3.63-3.11-4.78-5.23-2.13-3.9-3.26-8.15-4.06-12.49-.12-.66,.26-.64,.7-.64,1.59,0,3.19,0,4.78,0,4.69,0,9.37,0,14.06,0,.24,0,.48,.03,.89,.05Z"/>
+      <path class="cls-1" d="M90.33,18.59h-20.45c1.17-6.04,2.59-11.86,6.7-16.59,.5-.58,1.15-1.06,1.8-1.48,1.3-.85,2.86-.64,4.23,.47,2.21,1.77,3.53,4.18,4.67,6.68,1.43,3.14,2.26,6.46,2.94,9.83,.07,.35,.08,.72,.11,1.09Z"/>
+      <path class="cls-1" d="M58.24,37.49c-2.09,0-4.19-.01-6.28,0-.6,0-.91-.18-1.04-.8-.76-3.74-.97-7.49-.38-11.27,.12-.74,.27-1.47,.39-2.21,.09-.5,.33-.76,.88-.76,4.28,.01,8.56,.02,12.84,0,.78,0,.72,.46,.71,.99-.07,3.25-.15,6.49-.18,9.74-.01,1.06,.05,2.13,.18,3.18,.12,.95-.24,1.17-1.13,1.15-2-.06-4-.02-6-.02Z"/>
+      <path class="cls-1" d="M102,37.49c-2.09,0-4.18-.02-6.28,.01-.7,0-.95-.22-.87-.93,.47-4.39,.46-8.79,0-13.18-.07-.71,.17-.94,.87-.93,4.22,.02,8.43,.02,12.65,0,.56,0,.82,.17,.95,.75,.97,4.52,.99,9.03,0,13.55-.13,.58-.39,.75-.95,.74-2.12-.02-4.25,0-6.37,0Z"/>
+      <path class="cls-1" d="M52.52,41.39c.28-.06,.4-.11,.52-.11,4.06,0,8.12,.01,12.17,0,.61,0,.78,.26,.88,.82,.69,4,1.68,7.93,3.38,11.64,.7,1.52,1.6,2.96,2.4,4.43,.09,.16,.17,.32,.38,.71-3.42-.91-6.35-2.35-9.06-4.19-4.87-3.31-8.34-7.78-10.67-13.29Z"/>
+      <path class="cls-1" d="M107.79,18.62c-.38,.03-.6,.06-.81,.06-3.91,0-7.81-.02-11.72,.02-.73,0-.94-.25-1.1-.91-.7-2.94-1.27-5.93-2.27-8.77-.87-2.48-2.26-4.77-3.42-7.15-.09-.19-.19-.37-.39-.77,3.59,1,6.71,2.51,9.55,4.55,4.6,3.29,7.93,7.61,10.15,12.97Z"/>
+      <path class="cls-1" d="M52.59,18.58c2.12-7.37,12.98-17.01,19.51-17.35-.05,.16-.07,.31-.14,.43-3.32,4.92-4.84,10.48-5.87,16.23-.1,.57-.3,.8-.89,.8-4.03-.02-8.05,0-12.08,0-.15,0-.29-.05-.52-.09Z"/>
+      <path class="cls-1" d="M107.68,41.33c-1.64,6.91-13.51,17.5-19.37,17.37,.8-1.53,1.66-3.04,2.39-4.61,1.68-3.61,2.69-7.43,3.36-11.35,.25-1.45,.21-1.45,1.66-1.45,3.75,0,7.49,0,11.24,0,.21,0,.43,.03,.72,.04Z"/>
+    </g>
+    <path class="cls-1" d="M74.7,158.93c-3.41-1.66-6.39-3.06-9.32-4.55-6.75-3.44-13.58-6.72-21.14-7.87-6.73-1.02-13.51-1.65-20.28-2.41-4.54-.51-9.1-.8-13.63-1.43C3.38,141.7,.01,137.69,0,130.63c-.01-19.86-.01-39.73,0-59.59,0-7.87,3.75-11.39,11.65-11.64,12.99-.41,25.71,1.06,38.07,5.04,8.25,2.66,15.93,6.57,23.23,11.27,1.65,1.07,1.75,2.39,1.75,4.02-.02,24.19-.01,48.37-.01,72.56,0,2.04,0,4.09,0,6.64Z"/>
+    <path class="cls-1" d="M84.79,158.96c0-1.49,0-2.39,0-3.29,0-25.26,.02-50.51-.04-75.77,0-2.14,.6-3.43,2.47-4.63,12.78-8.22,26.64-13.42,41.77-14.91,6.67-.66,13.41-.85,20.12-.85,6.43,0,10.3,3.89,10.33,10.31,.1,20.69,.09,41.37,0,62.06-.03,6.08-4.06,10.13-10.55,10.81-8.09,.84-16.19,1.73-24.3,2.19-9.64,.55-18.54,3.3-27.02,7.77-4.02,2.12-8.15,4.03-12.78,6.31Z"/>
+  </g>
+</svg>
+                        </div>
+                             <p>Education for All</p>
+                    </div>
+                     <div class="nonprofit-logo" >
+                        <div class="logo-placeholder" style="padding: 13px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M269.5 69.9c11.1-7.9 25.9-7.9 37 0C329 85.4 356.5 96 384 96c26.9 0 55.4-10.8 77.4-26.1c0 0 0 0 0 0c11.9-8.5 28.1-7.8 39.2 1.7c14.4 11.9 32.5 21 50.6 25.2c17.2 4 27.9 21.2 23.9 38.4s-21.2 27.9-38.4 23.9c-24.5-5.7-44.9-16.5-58.2-25C449.5 149.7 417 160 384 160c-31.9 0-60.6-9.9-80.4-18.9c-5.8-2.7-11.1-5.3-15.6-7.7c-4.5 2.4-9.7 5.1-15.6 7.7c-19.8 9-48.5 18.9-80.4 18.9c-33 0-65.5-10.3-94.5-25.8c-13.4 8.4-33.7 19.3-58.2 25c-17.2 4-34.4-6.7-38.4-23.9s6.7-34.4 23.9-38.4C42.8 92.6 61 83.5 75.3 71.6c11.1-9.5 27.3-10.1 39.2-1.7c0 0 0 0 0 0C136.7 85.2 165.1 96 192 96c27.5 0 55-10.6 77.5-26.1zm37 288C329 373.4 356.5 384 384 384c26.9 0 55.4-10.8 77.4-26.1c0 0 0 0 0 0c11.9-8.5 28.1-7.8 39.2 1.7c14.4 11.9 32.5 21 50.6 25.2c17.2 4 27.9 21.2 23.9 38.4s-21.2 27.9-38.4 23.9c-24.5-5.7-44.9-16.5-58.2-25C449.5 437.7 417 448 384 448c-31.9 0-60.6-9.9-80.4-18.9c-5.8-2.7-11.1-5.3-15.6-7.7c-4.5 2.4-9.7 5.1-15.6 7.7c-19.8 9-48.5 18.9-80.4 18.9c-33 0-65.5-10.3-94.5-25.8c-13.4 8.4-33.7 19.3-58.2 25c-17.2 4-34.4-6.7-38.4-23.9s6.7-34.4 23.9-38.4c18.1-4.2 36.2-13.3 50.6-25.2c11.1-9.4 27.3-10.1 39.2-1.7c0 0 0 0 0 0C136.7 373.2 165.1 384 192 384c27.5 0 55-10.6 77.5-26.1c11.1-7.9 25.9-7.9 37 0zm0-144C329 229.4 356.5 240 384 240c26.9 0 55.4-10.8 77.4-26.1c0 0 0 0 0 0c11.9-8.5 28.1-7.8 39.2 1.7c14.4 11.9 32.5 21 50.6 25.2c17.2 4 27.9 21.2 23.9 38.4s-21.2 27.9-38.4 23.9c-24.5-5.7-44.9-16.5-58.2-25C449.5 293.7 417 304 384 304c-31.9 0-60.6-9.9-80.4-18.9c-5.8-2.7-11.1-5.3-15.6-7.7c-4.5 2.4-9.7 5.1-15.6 7.7c-19.8 9-48.5 18.9-80.4 18.9c-33 0-65.5-10.3-94.5-25.8c-13.4 8.4-33.7 19.3-58.2 25c-17.2 4-34.4-6.7-38.4-23.9s6.7-34.4 23.9-38.4c18.1-4.2 36.2-13.3 50.6-25.2c11.1-9.5 27.3-10.1 39.2-1.7c0 0 0 0 0 0C136.7 229.2 165.1 240 192 240c27.5 0 55-10.6 77.5-26.1c11.1-7.9 25.9-7.9 37 0z"/></svg></div>
                         <p>Clean Water Foundation</p>
                     </div>
                 </div>
@@ -1008,17 +508,68 @@
         </div>
     </section>
 
+        <section class="image-cards-section fade-in">
+        <div class="container">
+            <h2 class="section-title">NFT</h2>
+            <div class="image-cards-grid">
+                <div class="image-card fade-in stagger-1">
+                    <div class="card-image">
+                        <img src="nft/week1.png" alt="Partner 1">
+                    </div>
+                    <h3 class="card-title">Week 1</h3>
+                </div>
+                <div class="image-card fade-in stagger-2">
+                    <div class="card-image">
+                        <img src="nft/week2.png" alt="Partner 2">
+                    </div>
+                    <h3 class="card-title">Week 2</h3>
+                </div>
+                <div class="image-card fade-in stagger-3">
+                    <div class="card-image">
+                        <img src="nft/week3.png" alt="Partner 3">
+                    </div>
+                    <h3 class="card-title">Week 3</h3>
+                </div>
+                <div class="image-card fade-in stagger-4">
+                    <div class="card-image">
+                        <img src="nft/week4.png" alt="Partner 4">
+                    </div>
+                    <h3 class="card-title">Week 4</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+     <section class="showcase fade-in">
+        <div class="showcase-content">
+            <h2 class="showcase-title">Our Patanerships</h2>
+
+            <div class="showcase-logos">
+                <img src="image/Red-logo-white.svg" style="padding: 30px;" height="200px" alt="Partner 1">
+                <img src="image/zeroco2-logo-white.svg" style="padding: 30px;" height="200px" alt="Partner 2">
+                
+            </div>
+           
+        </div>
+    </section>
+
     <!-- Final CTA Section -->
     <section class="final-cta fade-in">
         <h2>Ready to start your day with purpose?</h2>
         <p>Join thousands who are transforming their mornings with meaningful content and positive impact.</p>
-        <a href="#connect" class="cta-large" id="connect">Connect with Telegram</a>
+        <a href="https://web.telegram.org/k/#@G4Gtestbot" class="cta-large" id="connect">Connect with Telegram</a>
         <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #666;">
             Join them and invest to daily news over daily noise
         </p>
-        <p style="margin-top: 2rem; font-size: 0.8rem; color: #444; border-top: 1px solid #333; padding-top: 2rem;">
+    </section>
+
+      <section class="final-cta fade-in" >
+        <h2>The Story Behind the movement</h2>
+          <a href="about.html" class="cta-large" id="connect">About Us</a>
+        <!-- <p style="margin-top: 2rem; font-size: 0.8rem; color: #444; border-top: 1px solid #333; padding-top: 2rem;">
             Powering G4G
-        </p>
+        </p> -->
     </section>
 
     <!-- Footer -->
